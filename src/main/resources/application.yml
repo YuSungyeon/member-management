@@ -6,6 +6,6 @@ spring:
 
 db:
   driver: com.mysql.cj.jdbc.Driver
-  url: jdbc:mysql://localhost:3306/member?serverTimezone=Asia/Seoul
-  username: root
-  password: 1234
+  url: jdbc:mysql://goorm.cv8yu8ywovhc.ap-northeast-2.rds.amazonaws.com:3306/goorm?serverTimezone=Asia/Seoul
+  username: admin
+  password: dbtjddus12^

@@ -26,12 +26,34 @@ repositories {
 }
 
 dependencies {
+    // --- Spring MVC 기본 웹 ---
     implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // --- JSP & JSTL ---
+    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
+    implementation 'javax.servlet:jstl:1.2'
+
+    // --- Lombok ---
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+
+    // --- DB (예: MySQL 드라이버) ---
+    implementation 'mysql:mysql-connector-java:8.0.33'
+
+    // --- Tomcat (WAR 실행용) ---
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+
+    // --- 테스트 ---
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('bootJar') {
+    enabled = false
+}
+
+tasks.named('bootWar') {
+    enabled = true
 }
 
 tasks.named('test') {
