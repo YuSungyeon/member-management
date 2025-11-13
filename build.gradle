@@ -1,8 +1,7 @@
 plugins {
-    id 'java'
-    id 'war'
-    id 'org.springframework.boot' version '3.5.7'
-    id 'io.spring.dependency-management' version '1.1.7'
+	id 'java'
+	id 'org.springframework.boot' version '3.5.7'
+	id 'io.spring.dependency-management' version '1.1.7'
 }
 
 group = 'com.goorm'
@@ -10,52 +9,44 @@ version = '0.0.1-SNAPSHOT'
 description = 'member-management'
 
 java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
-    }
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
 }
 
 configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
-    }
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
 }
 
 repositories {
-    mavenCentral()
+	mavenCentral()
 }
 
 dependencies {
-    // --- Spring MVC 기본 웹 ---
-    implementation 'org.springframework.boot:spring-boot-starter-web'
 
-    // --- JSP & JSTL ---
-    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
-    implementation 'javax.servlet:jstl:1.2'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
 
-    // --- Lombok ---
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
 
-    // --- DB (예: MySQL 드라이버) ---
-    implementation 'mysql:mysql-connector-java:8.0.33'
+	runtimeOnly 'com.mysql:mysql-connector-j'  // MySQL 드라이버
+	implementation 'com.mysql:mysql-connector-j'
 
-    // --- Tomcat (WAR 실행용) ---
-    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
-    // --- 테스트 ---
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-}
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0' // swegger -> [URL]/swagger-ui/index.html에서 확인
 
-tasks.named('bootJar') {
-    enabled = false
-}
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
 
-tasks.named('bootWar') {
-    enabled = true
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6' // 타임리프 스프링 시큐리티 사용
+	testImplementation 'org.springframework.security:spring-security-test' // 스프링 시큐리티 테스트
 }
 
 tasks.named('test') {
-    useJUnitPlatform()
+	useJUnitPlatform()
 }
