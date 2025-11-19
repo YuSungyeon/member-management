@@ -11,6 +11,11 @@ public class MemberDaoImpl implements MemberDao {
     private EntityManager em;
 
     @Override
+    public Member findById(Long id) {
+        return em.find(Member.class, id);
+    }
+
+    @Override
     public Member findByUsernameAndPassword(String username, String password) {
         try {
             return em.createQuery(

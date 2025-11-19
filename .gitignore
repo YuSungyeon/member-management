@@ -67,3 +67,6 @@ out/
 # ---------------------
 .vscode/
 *.xml
+
+GEMINI.md
+testcode_rules.md

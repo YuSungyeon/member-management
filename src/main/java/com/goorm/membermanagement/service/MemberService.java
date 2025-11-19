@@ -33,10 +33,12 @@ public class MemberService {
     // 정보 수정 (현재는 password만 수정 가능)
     @Transactional
     public boolean update(Long id, RequestDTO request) {
-        Member member = new Member();
-        member.setId(id);
-        member.setPassword(request.getPassword());
-        return memberDao.update(member);
+        Member member = memberDao.findById(id);
+        if (member != null) {
+            member.setPassword(request.getPassword());
+            return memberDao.update(member);
+        }
+        return false;
     }
 
     // 회원 삭제
